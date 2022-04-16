@@ -1,0 +1,27 @@
+如果存在相同部分，假設相同部分為intersection. 
+ListA = A + intersection 
+ListB = B + intersection 
+ListA+ListB = A + intersection + B+ (will meet)intersection 
+ListB + ListA = B + intersection + A +(will meet) intersection 
+如果沒有交集，那麼ListAListB 與LIstBListA遍歷到最後一個元素時 
+p1與p2相等均為NULL，所以retrun p1(NULL).
+
+/** * Definition for singly-linked list. 
+* struct ListNode { 
+* int val; 
+* struct ListNode *next; 
+* }; 
+*/ 
+struct ListNode *getIntersectionNode(struct ListNode *headA, struct ListNode *headB) { 
+    struct ListNode *p1 = headA; 
+    struct ListNode *p2 = headB; 
+    if (NULL == p1 || NULL == p2) return NULL; 
+    while (p1 != NULL && p2 != NULL && p1 != p2) { 
+        p1 = p1->next; 
+        p2 = p2->next; 
+        if(p1 == p2) return p1; 
+        if(NULL == p1) p1 = headB; 
+        if(NULL == p2) p2 = headA; 
+} 
+    return p1; 
+}

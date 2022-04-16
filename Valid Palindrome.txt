@@ -1,0 +1,47 @@
+/**
+ * 解題思路：迴文數，就是指一個單詞或句子，其順讀和倒讀都是一樣的。
+ *  迴文數： A man, a plan, a canal--Panama == amanaplanacanalpannama
+ * 由於順讀和倒讀都是一樣的，說明最後一個字母和第一個字母時相等的，倒數第二個字母和第二個字母時相等的，......
+ * 所以可以採用前後緊逼法，在字串最後設定一個指標p，在字串起始設定一個指標s，p想前移動，s向後移動，
+ * 來判斷字串是否為迴文數。
+ * 題目要求，除數字、字母外，忽略其他字元，同時字母不區分大小寫
+ */
+
+char compareCHAR(char ch);
+bool isPalindrome(char *s) {
+    int i,length,j;
+    char *p;
+    if(*s == '\0') return 1;//判斷空字元也是迴文數
+    length = 0;
+    while(*(s + length) != '\0'){//統計字串的長度
+        length++;
+    }
+    p = s + length - 1;//設定尾指標
+    i = j = 0;
+   while(s + j != p - i && s + j <= p - i){//當指標p的地址與s的地址相等，或者s的地址必須小於等於p的地址，則退出
+        if(compareCHAR(*(s + j)) == 0){j++;continue;}//當不是數字、字母時，指標向後移動一位
+        if(compareCHAR(*(p - i)) == 0){i++;continue;}
+        if(compareCHAR(*(s + j)) == compareCHAR(*(p - i))){
+            j++;
+            i++;
+            continue;
+        }else{
+            return 0;
+        }
+    }
+    return 1;
+
+}
+
+char compareCHAR(char ch){
+    if(ch >= 48 && ch <= 57){
+        return ch;
+    }else if(ch >= 65 && ch <= 90){//把A-Z轉化為a-z進行比較
+        return ch + 32;
+    }else if(ch >= 97 && ch <= 122){
+        return ch;
+    }else{
+        return 0;
+    }
+
+}

@@ -1,0 +1,18 @@
+int mySqrt(int x){
+	if(x==0)return 0;
+	if(x==1)return 1;
+    double L=0,r=x,temp;
+    while((int)r-(int)L!=0){
+        temp=(r+L)/2;
+        if(temp*temp>x){
+            r=temp;            
+        }
+        else if(temp*temp<x){
+            l=temp;           
+        }
+        else{
+            return temp;
+        }
+    }
+    return (int)temp;
+}
