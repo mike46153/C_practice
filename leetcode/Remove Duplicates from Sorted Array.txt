@@ -1,0 +1,29 @@
+int removeDuplicates(int* nums, int numsSize) {
+    if (numsSize == 0) return 0;
+
+    int i = 0;
+    for (int j = 1; j < numsSize; j++) {
+        if (nums[j] != nums[i]) {
+            i++;
+            nums[i] = nums[j];
+        }
+    }
+    return i + 1;
+}
+
+
+
+1.i 變數為當前被比較的值的索引值
+2.比對 i 之後的元素，跳過所有重複值
+3.一旦找到非重複值，我們就把位於 j 的非重複值移動至 i+1 的位置
+4.因為在第三步驟 i 已經加一，代表我們現在比對的元素變成第三步驟的值
+5.重複上述步驟
+
+
+以nums=[0,0,1,1,1,2,2,3,3,4]為例
+
+
+先比較nums[j=1]與nums[i=0]的值，nums[j=1]=0=nums[i=0]，值相同的情況i不會+1而j會因for迴圈+1繼續比較，
+所以下一個會變成比較nums[j=2]與nums[i=0]，nums[j=2]=1!=nums[i=0]=0，值相異的情況會把nums[i=1]的值替換成nums[j=2]的值，
+原本的陣列會變成nums=[0,1, ...]，接下來把j+1再繼續跟nums[i=1]比較，以此類推
+，則最後nums=[0,1,2,3,4]，且回傳值為5，表示陣列中有5種不同數字。
